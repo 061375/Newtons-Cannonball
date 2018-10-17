@@ -4,7 +4,7 @@
  * @author Jeremy Heminger <contact@jeremyheminger.com>
  * @website http://jeremyheminger.com
  * 
- * @version 1.0.1
+ * @version 1.0.3
  * @date October 2018
  *
  * Credit: Vector class from here: https://codepen.io/akm2/pen/rHIsa
@@ -12,17 +12,12 @@
  * @todo make things pretty - ver 1.0.1 is proof of concept and visibly UGLY
  *
  * */
-
-	// initalize constants
 const 	G = 6.674e-11,
- 		W = window.innerWidth,
-      	H = window.innerHeight,
-      	hW = (W/2),
-      	hH = (H/2),
-      	PLANETRADIUS = (H/3);
+		WW = window.innerWidth,
+		HH = window.innerHeight;
 
 // initialize variables
-var canvas, ctx, _cannon, _cannonball, _planet, _objects, c_speed, cspeed = 0.1, isrunnning = true;
+var canvas, ctx, _cannon, _cannonball, _planet, _objects, c_speed, cspeed = 0.1, isrunnning = true, W, H, hW, hH;
 
 // initalize listeners
 window.addEventListener('load', init, false);
@@ -35,6 +30,13 @@ window.addEventListener('resize', resizeHandler, false);
  * @function init
  * */
 function init() {
+
+	W = document.getElementById('container').clientWidth;
+	H = document.getElementById('container').clientHeight;
+	hW = (W/2);
+	hH = (H/2);
+	PLANETRADIUS = (H/3);
+
 	// set a constant based on the initial speed of the cannon ball
 	c_speed = cspeed;
 
@@ -52,19 +54,36 @@ function init() {
 	// add the objects in the order want them drawn
 	// from back to front
 	_objects = [
+		_cannonball,
 		_planet,
-		_cannon,
-		_cannonball
+		_cannon
 	];
 
 	// add the canvas
-	document.body.appendChild(canvas);
+	document.getElementById('container').appendChild(canvas);
+
+	makeStars(50);
 
 	// handle a resize
 	this.resizeHandler();
 
 	// start rendering
 	this.render();
+}
+/** 
+ * make some stars
+ * @method makeStars
+ * @param {Number}
+ * */
+function makeStars(n) {
+
+	for(let i=0; i<n; i++) {
+		let s = document.createElement('div');	
+			s.setAttribute('class','star');
+			s.style.left = (Math.random() * WW)+'px';
+			s.style.top = (Math.random() * HH)+'px';
+		document.getElementById('stars').appendChild(s);
+	}
 }
 /** 
  * just like the name implies
@@ -225,7 +244,7 @@ class Cannon {
 	constructor(x,y,r,d) {
 
 		// @var {Number} An amount to resize objects in relation to the planet size
-		this.divsize = 20;
+		this.divsize = 25;
 		// @var {Number}
 		this.r = r;
 		// @var {Number}
@@ -316,10 +335,10 @@ class Cannon {
 	mountain() {
 
 		// create the polygon coords for the mountain
-		this.vars.mountain.coords[0] = trig(this.pos.x,this.pos.y,(this.r/(this.divsize/2)),(this.d-90),true);
+		this.vars.mountain.coords[0] = trig(this.pos.x,this.pos.y+5,(this.r/(this.divsize/2)),(this.d-90),true);
 		this.vars.mountain.coords[1] = trig(this.pos.x,this.pos.y,(this.r/(this.divsize/5)),this.d-10,true);
 		this.vars.mountain.coords[2] = trig(this.pos.x,this.pos.y,(this.r/(this.divsize/5)),this.d+10,true);
-		this.vars.mountain.coords[3] = trig(this.pos.x,this.pos.y,(this.r/(this.divsize/2)),(this.d+90),true);
+		this.vars.mountain.coords[3] = trig(this.pos.x,this.pos.y+5,(this.r/(this.divsize/2)),(this.d+90),true);
 	}
 	/** 
 	 * 
