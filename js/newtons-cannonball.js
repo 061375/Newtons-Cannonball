@@ -13,7 +13,7 @@
  *
  * */
 
-// initalize constants
+	// initalize constants
 const G = 6.674e-11,
  	  W = window.innerWidth,
       H = window.innerHeight,
