@@ -14,12 +14,12 @@
  * */
 
 	// initalize constants
-const G = 6.674e-11,
- 	  W = window.innerWidth,
-      H = window.innerHeight,
-      hW = (W/2),
-      hH = (H/2),
-      PLANETRADIUS = (H/3);
+const 	G = 6.674e-11,
+ 		W = window.innerWidth,
+      	H = window.innerHeight,
+      	hW = (W/2),
+      	hH = (H/2),
+      	PLANETRADIUS = (H/3);
 
 // initialize variables
 var canvas, ctx, _cannon, _cannonball, _planet, _objects, c_speed, cspeed = 0.1, isrunnning = true;
@@ -136,8 +136,8 @@ function trig(x,y,r,d,array) {
 	if(d>360)d-=360;
 
 	let a = d * Math.PI / 180;
-    let xpos = r * Math.cos(a);
-    let ypos = r * Math.sin(a);
+	let xpos = r * Math.cos(a);
+	let ypos = r * Math.sin(a);
 
     if(array) {
     	return [
@@ -196,10 +196,10 @@ class Planet {
 	 * */
 	draw() {
 		ctx.fillStyle=this.vars.color;       
-        ctx.beginPath();
-        ctx.arc(this.vars.x,this.vars.y,this.vars.r,0,Math.PI*2,true);
-        ctx.closePath();
-        ctx.fill();
+		ctx.beginPath();
+		ctx.arc(this.vars.x,this.vars.y,this.vars.r,0,Math.PI*2,true);
+		ctx.closePath();
+		ctx.fill();
 	}
 	/** 
 	 * 
@@ -277,17 +277,17 @@ class Cannon {
 
 		// cannon wheel
 		ctx.beginPath();
-        ctx.arc(this.vars.cannon.x,this.vars.cannon.y,this.vars.cannon.r,0,Math.PI*2,true);
-        ctx.closePath();
-        ctx.fill();
+		ctx.arc(this.vars.cannon.x,this.vars.cannon.y,this.vars.cannon.r,0,Math.PI*2,true);
+		ctx.closePath();
+		ctx.fill();
 
-        // cannon breach
+		// cannon breach
 		ctx.beginPath();
-        ctx.arc(this.vars.cannon.breach.x,this.vars.cannon.breach.y,this.vars.cannon.breach.r,0,Math.PI*2,true);
-        ctx.closePath();
-        ctx.fill();
+		ctx.arc(this.vars.cannon.breach.x,this.vars.cannon.breach.y,this.vars.cannon.breach.r,0,Math.PI*2,true);
+		ctx.closePath();
+		ctx.fill();
 
-        // cannon barrel
+		// cannon barrel
 		ctx.beginPath();
 		ctx.fillRect(
 			this.vars.cannon.barrel.x,
@@ -296,17 +296,17 @@ class Cannon {
 			this.vars.cannon.barrel.h
 		);
 
-        // mountain
-        ctx.fillStyle=this.vars.mountain.color;
-        ctx.beginPath();
-        ctx.moveTo(this.vars.mountain.coords[0][0],this.vars.mountain.coords[0][1]);
-        for (let i = 0;i<this.vars.mountain.coords.length; i++) {
-        	ctx.lineTo(
-        		this.vars.mountain.coords[i][0],
-        		this.vars.mountain.coords[i][1]
-        	);
-        }
-        ctx.fill();
+		// mountain
+		ctx.fillStyle=this.vars.mountain.color;
+		ctx.beginPath();
+		ctx.moveTo(this.vars.mountain.coords[0][0],this.vars.mountain.coords[0][1]);
+		for (let i = 0;i<this.vars.mountain.coords.length; i++) {
+			ctx.lineTo(
+				this.vars.mountain.coords[i][0],
+				this.vars.mountain.coords[i][1]
+			);
+		}
+		ctx.fill();
 
 	}
 	/** 
@@ -441,9 +441,9 @@ class Cannonball {
 	draw() {
 		ctx.fillStyle=this.vars.color;
 		ctx.beginPath();
-        ctx.arc(this.vars.x,this.vars.y,this.vars.r,0,Math.PI*2,true);
-        ctx.closePath();
-        ctx.fill();
+		ctx.arc(this.vars.x,this.vars.y,this.vars.r,0,Math.PI*2,true);
+		ctx.closePath();
+		ctx.fill();
 	}
 	/** 
 	 * comment
