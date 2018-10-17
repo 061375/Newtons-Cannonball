@@ -4,12 +4,11 @@
  * @author Jeremy Heminger <contact@jeremyheminger.com>
  * @website http://jeremyheminger.com
  * 
- * @version 1.0.3
+ * @version 1.0.4
  * @date October 2018
  *
  * Credit: Vector class from here: https://codepen.io/akm2/pen/rHIsa
  *
- * @todo make things pretty - ver 1.0.1 is proof of concept and visibly UGLY
  *
  * */
 const 	G = 6.674e-11,
@@ -17,7 +16,7 @@ const 	G = 6.674e-11,
 		HH = window.innerHeight;
 
 // initialize variables
-var canvas, ctx, _cannon, _cannonball, _planet, _objects, c_speed, cspeed = 0.1, isrunnning = true, W, H, hW, hH;
+var canvas, ctx, _cannon, _cannonball, _planet, _objects, c_speed = 0.1 , cspeed = 0.8, isrunnning = true, W, H, hW, hH;
 
 // initalize listeners
 window.addEventListener('load', init, false);
@@ -38,7 +37,7 @@ function init() {
 	PLANETRADIUS = (H/3);
 
 	// set a constant based on the initial speed of the cannon ball
-	c_speed = cspeed;
+	//c_speed = cspeed;
 
 	// create the canvas
 	canvas = document.createElement('canvas');
@@ -210,18 +209,19 @@ class Planet {
 	 * */
 	loop() {}
 	/** 
-	 * 
 	 * @method draw
 	 * */
 	draw() {
-		ctx.fillStyle=this.vars.color;       
 		ctx.beginPath();
+		var grd=ctx.createRadialGradient(75,50,300,90,60,800);
+			grd.addColorStop(0,this.vars.color);
+			grd.addColorStop(1,'#000');
+		ctx.fillStyle=grd;       
 		ctx.arc(this.vars.x,this.vars.y,this.vars.r,0,Math.PI*2,true);
 		ctx.closePath();
 		ctx.fill();
 	}
 	/** 
-	 * 
 	 * @method get
 	 * @returns {Object}
 	 * */
@@ -231,7 +231,6 @@ class Planet {
 
 }
 /** 
- *
  * @class Canon
  * */
 class Cannon {
@@ -288,7 +287,6 @@ class Cannon {
 	 * */
 	loop() {}
 	/** 
-	 * 
 	 * @method draw
 	 * */
 	draw() {
@@ -333,7 +331,6 @@ class Cannon {
 	 * @method mountain
 	 * */
 	mountain() {
-
 		// create the polygon coords for the mountain
 		this.vars.mountain.coords[0] = trig(this.pos.x,this.pos.y+5,(this.r/(this.divsize/2)),(this.d-90),true);
 		this.vars.mountain.coords[1] = trig(this.pos.x,this.pos.y,(this.r/(this.divsize/5)),this.d-10,true);
@@ -341,28 +338,27 @@ class Cannon {
 		this.vars.mountain.coords[3] = trig(this.pos.x,this.pos.y+5,(this.r/(this.divsize/2)),(this.d+90),true);
 	}
 	/** 
-	 * 
 	 * @method makecanon
 	 * */
 	makecannon() {
-
+		// cannon wheel
 		let xy = trig(this.pos.x,this.pos.y,(this.r/(this.divsize/6)),this.d,false);
 		this.vars.cannon.x = xy.x;
-		this.vars.cannon.y = xy.y;
-		this.vars.cannon.r = (this.r/this.divsize);
+		this.vars.cannon.y = xy.y+5;
+		this.vars.cannon.r = (this.r/this.divsize)-5;
 
+		// breach
 		xy = trig(this.vars.cannon.x,this.vars.cannon.y,this.vars.cannon.r,-120);
 		this.vars.cannon.breach.x = xy.x;
 		this.vars.cannon.breach.y = xy.y;
-		this.vars.cannon.breach.r = 10;
+		this.vars.cannon.breach.r = this.vars.cannon.r/2;
 
 		this.vars.cannon.barrel.x = xy.x;
-		this.vars.cannon.barrel.y = xy.y-10;
-		this.vars.cannon.barrel.w = 50;
-		this.vars.cannon.barrel.h = 20;
+		this.vars.cannon.barrel.y = xy.y-3;
+		this.vars.cannon.barrel.w = this.vars.cannon.r*3;
+		this.vars.cannon.barrel.h = this.vars.cannon.r;
 	}
 	/** 
-	 * 
 	 * @method get
 	 * @returns {Object}
 	 * */
@@ -371,22 +367,26 @@ class Cannon {
 	}
 }
 /** 
- * 
  * @method Canonball
  * */
 class Cannonball {
 
 	constructor(x,y) {
+		//
 		Vector.call(this, x, y);
+		// @var {Number}
 		this.startx = x;
+		// @var {Number}
 		this.starty = y;
+		// @var {Number}
 		this.deadtimer = 0; // this counts until the reset
+		// @var {Number}
 		this.resettimer = 1; // raise this to set a pause beween resets
-
+		// @var {Object}
 		this.vars = {
 			x:x,
 			y:y,
-			r:10,
+			r:3,
 			dead:false,
 			speed: new Vector(cspeed,0),
 			dir:0,
@@ -410,8 +410,11 @@ class Cannonball {
 
 		//
 		if(this.vars.dead) {
+			// move the cannonball off the stage
 			this.vars.x = 1000000;
+			// increment the timer
 			this.deadtimer++;
+			// if timer greater than reset
 			if(this.deadtimer > this.resettimer)
 				this.reset();
 		}else{
@@ -454,7 +457,6 @@ class Cannonball {
 		}
 	}
 	/** 
-	 * 
 	 * @method draw
 	 * */
 	draw() {
@@ -465,7 +467,6 @@ class Cannonball {
 		ctx.fill();
 	}
 	/** 
-	 * comment
 	 * @method
 	 * */
 	addSpeed(d) {
