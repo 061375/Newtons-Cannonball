@@ -18,4 +18,4 @@ I want to make this look better. I simply wrote the code to get the concept work
 
 #### Latest Screenshot
 
-![alt text](https://github.com/061375/Newtons-Cannonball/blob/master/screen.1.0.3.png?raw=true "Screenshot")
+![alt text](https://github.com/061375/Newtons-Cannonball/blob/master/screen.1.0.4.png?raw=true "Screenshot")
