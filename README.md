@@ -15,3 +15,7 @@ I am not a Mathologer by any means but, I did want to figure it out for myself a
 ### TODO
 
 I want to make this look better. I simply wrote the code to get the concept working without much thought about aesthetics.
+
+#### Latest Screenshot
+
+![alt text](https://github.com/061375/Newtons-Cannonball/blob/master/screen.1.0.3.png?raw=true "Screenshot")
