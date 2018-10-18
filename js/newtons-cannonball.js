@@ -28,7 +28,7 @@ window.addEventListener('resize', resizeHandler, false);
  * initalize
  * @function init
  * */
-function init() {
+function init(e, b_reset) {
 
 	W = document.getElementById('container').clientWidth;
 	H = document.getElementById('container').clientHeight;
@@ -36,13 +36,12 @@ function init() {
 	hH = (H/2);
 	PLANETRADIUS = (H/3);
 
-	// set a constant based on the initial speed of the cannon ball
-	//c_speed = cspeed;
-
-	// create the canvas
-	canvas = document.createElement('canvas');
-	ctx = canvas.getContext('2d');
-
+	if (undefined === b_reset) {
+		// create the canvas
+		canvas = document.createElement('canvas');
+		ctx = canvas.getContext('2d');
+	}
+	
 	// instantiate our classes
 	_planet = new Planet(hW,hH,PLANETRADIUS,-90);
 
@@ -58,16 +57,20 @@ function init() {
 		_cannon
 	];
 
-	// add the canvas
-	document.getElementById('container').appendChild(canvas);
+	if (undefined === b_reset) {
+		// add the canvas
+		document.getElementById('container').appendChild(canvas);
+	
+		makeStars(50);
+	}
+	
+	canvas.height = H;
+	canvas.width = W;
 
-	makeStars(50);
-
-	// handle a resize
-	this.resizeHandler();
-
-	// start rendering
-	this.render();
+	if (undefined === b_reset) {
+		// start rendering
+		this.render();
+	}
 }
 /** 
  * make some stars
@@ -107,6 +110,12 @@ function startLoop() {
 function resizeHandler() {
 	canvas.height = H;
 	canvas.width = W;
+	_objects = [];
+	_planet = null;
+	_cannon = null;
+	_cannonball = null;
+	isrunnning = true;
+	init(null, true);
 }
 /** 
  * clear the canvas
@@ -213,7 +222,14 @@ class Planet {
 	 * */
 	draw() {
 		ctx.beginPath();
-		var grd=ctx.createRadialGradient(75,50,300,90,60,800);
+		// handle the shadow on resize
+		let s1 = 300;
+		let s2 = 800;
+		if (H < 550) {
+			s1 = 100;
+			s2 = 300;
+		}
+		var grd=ctx.createRadialGradient(75,50,s1,90,60,s2);
 			grd.addColorStop(0,this.vars.color);
 			grd.addColorStop(1,'#000');
 		ctx.fillStyle=grd;       
@@ -345,7 +361,7 @@ class Cannon {
 		let xy = trig(this.pos.x,this.pos.y,(this.r/(this.divsize/6)),this.d,false);
 		this.vars.cannon.x = xy.x;
 		this.vars.cannon.y = xy.y+5;
-		this.vars.cannon.r = (this.r/this.divsize)-5;
+		this.vars.cannon.r = Math.abs((this.r/this.divsize)-5);
 
 		// breach
 		xy = trig(this.vars.cannon.x,this.vars.cannon.y,this.vars.cannon.r,-120);
@@ -426,7 +442,6 @@ class Cannonball {
 
 			// init empty vector
 			let a = new Vector(0,0);
-
 
 			this.vars.planet.rv.x -= this.vars.x;
 			this.vars.planet.rv.y -= this.vars.y;
