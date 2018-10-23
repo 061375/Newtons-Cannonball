@@ -2,9 +2,10 @@
  * Newton's Cannon
  * https://en.wikipedia.org/wiki/Newton%27s_cannonball
  * @author Jeremy Heminger <contact@jeremyheminger.com>
+ * @github https://github.com/061375/Newtons-Cannonball
  * @website http://jeremyheminger.com
  * 
- * @version 1.0.4
+ * @version 1.0.5
  * @date October 2018
  *
  * Credit: Vector class from here: https://codepen.io/akm2/pen/rHIsa

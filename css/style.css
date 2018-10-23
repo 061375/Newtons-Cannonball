@@ -7,10 +7,7 @@ body { background-color: #000 }
 	margin: auto;
 	width: 100vh;
 	height: 100vh;
-	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#0011ff+12,0011ff+12,d1d4ff+49,d1d4ff+49,000000+68,000000+100&1+0,1+52,0.2+76 */
-	background: -moz-radial-gradient(center, ellipse cover, rgba(0,17,255,1) 0%, rgba(0,17,255,1) 12%, rgba(209,212,255,1) 49%, rgba(176,179,215,1) 52%, rgba(0,0,0,0.47) 68%, rgba(0,0,0,0.2) 76%, rgba(0,0,0,0.2) 100%); /* FF3.6-15 */
-	background: -webkit-radial-gradient(center, ellipse cover, rgba(0,17,255,1) 0%,rgba(0,17,255,1) 12%,rgba(209,212,255,1) 49%,rgba(176,179,215,1) 52%,rgba(0,0,0,0.47) 68%,rgba(0,0,0,0.2) 76%,rgba(0,0,0,0.2) 100%); /* Chrome10-25,Safari5.1-6 */
-	background: radial-gradient(ellipse at center, rgba(0,17,255,1) 0%,rgba(0,17,255,1) 12%,rgba(209,212,255,1) 49%,rgba(176,179,215,1) 52%,rgba(0,0,0,0.47) 68%,rgba(0,0,0,0.2) 76%,rgba(0,0,0,0.2) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	    background: radial-gradient(ellipse at center, rgba(0,17,255,1) 0%,rgba(0,17,255,1) 12%,rgba(209, 212, 255, 0.65) 45%,rgba(176, 179, 215, 0.35) 50%,rgba(0, 0, 0, 0.15) 68%,rgba(0,0,0,0.2) 76%,rgba(0, 0, 0, 0.2) 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0011ff', endColorstr='#33000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
