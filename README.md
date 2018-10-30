@@ -3,6 +3,9 @@ Newton's cannonball was a thought experiment Isaac Newton used to hypothesize th
 
 https://en.wikipedia.org/wiki/Newton%27s_cannonball
 
+### Demo
+http://demo.jeremyheminger.com/Newtons-Cannonball/
+
 The cannon fires a ball that falls to earth.
 The cannon adds some power to the next shot and the cannonball goes a bit farther.
 Eventually the ball flies with enough velocity to break the planets gravity and falls into orbit.
